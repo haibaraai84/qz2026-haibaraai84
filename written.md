@@ -210,15 +210,17 @@ for a in logs:
         result.append(a)
 
 
-2. count = {}
-for b in logs:
-    if b["user"] in count:
-        count[b["user"]] += 1
-    else:
-        count[b["user"]] = 1
+2. count ={}
+    for b in logs:
+        if b["user"] in count:
+            count[b["user"]]+=1
+        else:
+            count[b["user"]]=1
 
 
 3. 要的是每个用户出现几次，不是日志里所有人总共出现几次，所以用for找出每个人，用字典再存入名字和出现次数
+
+
 
 ### 第 3 题：异常处理设计
 
@@ -233,4 +235,14 @@ Day_10 中你写过 `safe_int(s)` 函数：能转就返回整数，不能转就�
 
 请写出函数代码，并说明：为什么这里用 `try/except` 比先用 `if` 判断再计算更好？
 
-（在此作答）
+def safe_divide(a,b):
+    try:
+        x=float(a)
+        y=float(b)
+        return x/y
+    except ValueError:
+        return None
+    except ZeroDivisionError:
+        return None
+ 
+正难则反，if还得正面考虑转换失败的所有情况，try except就不用穷举所有可能情况，不会漏掉每个失败的情况
