@@ -204,11 +204,21 @@ logs = [
 ]
 ```
 
-1. 写出表达式，找出所有 `level` 为 `"ERROR"` 的日志（返回字典列表）。
-2. 写出表达式，统计每个用户出现了几次（返回字典，键为用户名，值为次数）。
-3. 解释为什么第 2 问不能直接用 `len(logs)` 得到结果，需要什么遍历结构？
+1. result = []
+for a in logs:
+    if a["level"] == "ERROR":
+        result.append(a)
 
-（在此作答）
+
+2. count = {}
+for b in logs:
+    if b["user"] in count:
+        count[b["user"]] += 1
+    else:
+        count[b["user"]] = 1
+
+
+3. 要的是每个用户出现几次，不是日志里所有人总共出现几次，所以用for找出每个人，用字典再存入名字和出现次数
 
 ### 第 3 题：异常处理设计
 
