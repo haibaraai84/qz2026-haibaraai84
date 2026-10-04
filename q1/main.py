@@ -48,5 +48,4 @@ def analyze_log(filepath: str) -> dict:
     return {"total": total, "by_level": by_level, "by_user": by_user, "last_error": last_error}
 
 
-if __name__ == "__main__":
-    print(analyze_log("app.jsonl"))
+print(analyze_log("app.jsonl"))
