@@ -1,5 +1,4 @@
 import json
-import os
 
 
 def analyze_log(filepath: str) -> dict:
@@ -9,14 +8,13 @@ def analyze_log(filepath: str) -> dict:
     by_user = {}
     last_error = None
 
-    # ---- 第 2 步：文件不存在就直接返回空结果，不报错 ----
-    if not os.path.exists(filepath):
+    # ---- 第 2 步：打开文件。文件不存在就直接返回空结果，不报错 ----
+    try:
+        f = open(filepath, "r", encoding="utf-8")
+    except FileNotFoundError:
         return {"total": 0, "by_level": {}, "by_user": {}, "last_error": None}
 
-    # ---- 第 3 步：打开文件 ----
-    f = open(filepath, "r", encoding="utf-8")
-
-    # ---- 第 4 步：一行一行读 ----
+    # ---- 第 3 步：一行一行读 ----
     for line in f:
         # 这行不是合法 JSON，就跳过，继续看下一行
         try:
@@ -43,10 +41,10 @@ def analyze_log(filepath: str) -> dict:
         if d["level"] == "ERROR":
             last_error = d["message"]
 
-    # ---- 第 5 步：关闭文件 ----
+    # ---- 第 4 步：关闭文件 ----
     f.close()
 
-    # ---- 第 6 步：返回结果 ----
+    # ---- 第 5 步：返回结果 ----
     return {"total": total, "by_level": by_level, "by_user": by_user, "last_error": last_error}
 
 
