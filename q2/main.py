@@ -38,3 +38,21 @@ class UserManager:
 
     def list_users(self):
         return self.users
+
+    def save_to_json(self, filepath):
+        f = open(filepath, "w", encoding="utf-8")
+
+        json.dump(self.users, f, ensure_ascii=False)
+
+        f.close()
+
+    def load_from_json(self, filepath):
+        f = open(filepath, "r",  encoding="utf-8")
+        self.users = json.load(f)
+        f.close()
+
+        max_id = 0
+        for x in self.users:
+            if x["id"]  >  max_id:
+                max_id = x["id"]
+        self.next_id = max_id + 1
