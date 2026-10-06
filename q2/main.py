@@ -15,3 +15,9 @@ class UserManager:
         self.users.append(user)
         self.next_id += 1
         return user
+
+    def get_user(self, user_id):
+        for user in self.users:
+            if user["id"] == user_id:
+                return user
+        return None
