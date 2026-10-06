@@ -28,3 +28,13 @@ class UserManager:
             return False
         user["age"] = new_age
         return True
+
+    def remove_user(self, user_id):
+        user = self.get_user(user_id)
+        if user is None:
+            return False
+        self.users.remove(user)
+        return True
+
+    def list_users(self):
+        return self.users
